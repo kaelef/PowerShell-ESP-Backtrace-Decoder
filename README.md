@@ -3,7 +3,7 @@ Simple PowerShell script to decode ESP backtrace output
 
 This is inspired by https://github.com/me-no-dev/EspExceptionDecoder and https://github.com/littleyoda/EspStackTraceDecoder
 
-Simply reads ESP backtrace output either from a file as a command line argument or through the pipeline and builds a string of arguments with which to execute the Xtensa addr2line utility.
+Simply reads ESP backtrace output either from a file as a command line argument or through the pipeline and launches the Xtensa addr2line utility to generate the desired output.
 
 This should work on any system with PowerShell or PowerShell Core and the addr2line utility, although it's only been tested on Windows.  Both ESP8266 and ESP32 projects should work, although only ESP32 has been tested.
 
