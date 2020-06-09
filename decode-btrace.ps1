@@ -1,10 +1,14 @@
 param (
-[Parameter(ValueFromPipeline=$true)][string[]]$text,
+[Parameter(ValueFromPipeline=$true)]
+	[string[]]$text,
 [Parameter(Mandatory=$true,
-	HelpMessage="Path to Xtensa addr2line program.")][string]$addr2line,
+	HelpMessage="Path to Xtensa addr2line program.")]
+	[string]$addr2line,
 [Parameter(Mandatory=$true,
-	HelpMessage="Path to ELF binary.")][string]$elf,
-[Parameter()][string]$trace
+	HelpMessage="Path to ELF binary.")]
+	[string]$elf,
+[Parameter()]
+	[string]$trace
 )
 begin
 {
@@ -39,5 +43,21 @@ process {
 }
 end
 {
-	start-process -filepath $program -argumentlist $arguments -nonewwindow -wait
+	$pinf = new-object system.diagnostics.processstartinfo
+	$pinf.filename = $program
+	$pinf.useshellexecute = $false
+	$pinf.redirectstandarderror = $true	
+	$pinf.redirectstandardoutput = $true
+	$pinf.arguments = $arguments
+	
+	$proc = new-object system.diagnostics.process
+	$proc.startinfo = $pinf
+	$proc.start() | out-null
+	
+	$stdout = $proc.standardoutput.readtoend()
+	$stderr = $proc.standarderror.readtoend()
+	$proc.waitforexit()
+
+	write-output $stdout
+	write-output $stderr
 }
