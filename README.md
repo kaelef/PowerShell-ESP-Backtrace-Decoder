@@ -19,7 +19,7 @@ addr2line is provided as part of the Espressive SDK's. On systems running Platfo
 
 The ELF file is the compiled binary file.  On systems running PlatformIO, it's usually in `<project_dir>\.pio\build\esp32\firmware.elf`
 
-The backtrace file is any file that contains your backtrace output. The only section that matters is the actual backtrace line(s). e.g.:
+The backtrace file is any file that contains your backtrace output. The only section that matters is the actual backtrace line(s). Any other text in the file will be ignored.  e.g.:
 ```
 Backtrace: 0x40152014:0x3ffaf1c0 0x40140bfd:0x3ffaf1e0 0x40141122:0x3ffaf200 0x40141c5b:0x3ffaf220 0x40141b3d:0x3ffaf240 0x40141d48:0x3ffaf260 0x4013c75c:0x3ffaf280 0x4008d499:0x3ffaf2b0
 ```
